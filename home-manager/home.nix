@@ -24,6 +24,7 @@ in
     # Custom import for username and email
     (import ./configs/git.nix { inherit pkgs config lib; userEmail = email; userName = fullName; })
 
+    ./configs/firefox.nix
     ./configs/ssh.nix
     ./configs/nvim.nix
     ./configs/starship.nix
@@ -41,6 +42,8 @@ in
     };
   };
 
+  fonts.fontconfig.enable = true;
+
   home = {
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";
@@ -52,7 +55,15 @@ in
       NIXOS_OZONE_WL = "1";
     };
 
+    file = {
+      "${config.xdg.configHome}/tmux".source = ./dotfiles/tmux;
+      "${config.xdg.configHome}/bottom".source = ./dotfiles/bottom;
+    };
+
     packages = with pkgs; [
+      nh
+      bottom
+      lazygit
       neofetch
       mission-center
       discord
@@ -60,8 +71,12 @@ in
       ripgrep
       rm-improved
       dust
-      firefox
       gh
+      zoxide
+      xcp
+      unzip
+
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
   };
 

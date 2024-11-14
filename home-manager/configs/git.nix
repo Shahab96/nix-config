@@ -20,6 +20,9 @@
       user = {
         signingKey = "~/.ssh/id_ed25519.pub";
       };
+      pull = {
+        rebase = true;
+      };
     };
   };
 }

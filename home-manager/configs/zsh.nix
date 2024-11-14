@@ -7,14 +7,26 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    initExtraFirst = ''
+      [[ "$TERM" == "linux" ]] && return
+    '';
+
+    initExtra = ''
+      source <(nh completions --shell zsh)
+      eval "$(zoxide init zsh)"
+      [[ -z "$TERM" ]] && exec tmux
+    '';
+
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake ~/.dotfiles && home-manager switch --flake ~/.dotfiles";
       ".." = "cd ..";
       ls = "exa";
       vim = "nvim";
       grep = "rg";
       du = "dust";
       rm = "rip";
+      cp = "xcp";
+      update-os = "nh os switch ~/.dotfiles";
+      update-home = "nh home switch ~/.dotfiles";
     };
 
     history = {
