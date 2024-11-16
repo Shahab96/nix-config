@@ -78,7 +78,12 @@ in
       prismlauncher
       tmux
       lazygit
-
+      gcc
+      zig
+      protonmail-desktop
+      protonvpn-gui
+      cloudflare-warp
+      kubectl
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
