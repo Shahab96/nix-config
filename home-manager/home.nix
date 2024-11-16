@@ -75,6 +75,7 @@ in
       zoxide
       xcp
       unzip
+      prismlauncher
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
