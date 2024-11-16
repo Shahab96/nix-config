@@ -58,6 +58,7 @@ in
     file = {
       "${config.xdg.configHome}/tmux".source = ./dotfiles/tmux;
       "${config.xdg.configHome}/bottom".source = ./dotfiles/bottom;
+      "${config.xdg.configHome}/nvim".source = ./dotfiles/nvim;
     };
 
     packages = with pkgs; [
@@ -65,7 +66,6 @@ in
       bottom
       lazygit
       neofetch
-      mission-center
       discord
       eza
       ripgrep
@@ -76,6 +76,9 @@ in
       xcp
       unzip
       prismlauncher
+      tmux
+      lazygit
+
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
