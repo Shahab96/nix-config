@@ -27,7 +27,7 @@
       cp = "xcp";
       update-os = "nh os switch ~/.dotfiles";
       update-home = "nh home switch ~/.dotfiles";
-      k = "kubectl"
+      k = "kubectl";
     };
 
     history = {
