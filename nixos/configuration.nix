@@ -47,6 +47,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -64,7 +65,10 @@
   # Enable sound with pipewire.
   hardware = {
     pulseaudio.enable = false;
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [ amdvlk ];
+    };
   };
 
   security.rtkit.enable = true;

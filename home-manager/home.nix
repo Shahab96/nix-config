@@ -84,6 +84,8 @@ in
       protonvpn-gui
       cloudflare-warp
       kubectl
+      gparted
+      k9s
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
