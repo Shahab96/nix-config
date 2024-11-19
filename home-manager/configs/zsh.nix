@@ -25,8 +25,8 @@
       du = "dust";
       rm = "rip";
       cp = "xcp";
-      update-os = "nh os switch ~/.dotfiles";
-      update-home = "nh home switch ~/.dotfiles";
+      uo = "nh os switch ~/.dotfiles";
+      uh = "nh home switch ~/.dotfiles";
       k = "kubectl";
     };
 
