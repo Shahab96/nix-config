@@ -89,7 +89,6 @@ in
       k9s
       gnupg
       postgresql_17
-      nix-direnv
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
