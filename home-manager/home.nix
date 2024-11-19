@@ -86,6 +86,7 @@ in
       kubectl
       gparted
       k9s
+      gnupg
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
