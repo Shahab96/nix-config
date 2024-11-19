@@ -117,6 +117,25 @@
     polkitPolicyOwners = [ "shahab" ];
   };
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+      dockerCompat = true;
+
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
+    };
+
+    containers = {
+      registries = {
+        search = ["docker.io"];
+      };
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
