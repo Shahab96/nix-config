@@ -25,6 +25,7 @@ in
     (import ./configs/git.nix { inherit pkgs config lib; userEmail = email; userName = fullName; })
 
     ./configs/firefox.nix
+    ./configs/direnv.nix
     ./configs/ssh.nix
     ./configs/nvim.nix
     ./configs/starship.nix
@@ -87,6 +88,8 @@ in
       gparted
       k9s
       gnupg
+      postgresql_17
+      nix-direnv
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
