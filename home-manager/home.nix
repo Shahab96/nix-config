@@ -89,6 +89,7 @@ in
       k9s
       gnupg
       postgresql_17
+      dig
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
