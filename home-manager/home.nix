@@ -90,6 +90,7 @@ in
       gnupg
       postgresql_17
       dig
+      bash
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
