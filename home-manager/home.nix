@@ -61,6 +61,7 @@ in
       "${config.xdg.configHome}/bottom".source = ./dotfiles/bottom;
       "${config.xdg.configHome}/nvim".source = ./dotfiles/nvim;
       "${config.xdg.configHome}/hypr".source = ./dotfiles/hypr;
+      "${config.xdg.configHome}/waybar".source = ./dotfiles/waybar;
     };
 
     packages = with pkgs; [
@@ -95,6 +96,7 @@ in
       kitty
       wofi
       dolphin
+      waybar
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
