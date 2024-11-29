@@ -104,7 +104,7 @@
 
     isNormalUser = true;
     description = "Shahab Dogar";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
   };
 
   # Allow unfree packages

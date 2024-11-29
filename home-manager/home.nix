@@ -98,6 +98,10 @@ in
       dolphin
       waybar
       font-awesome
+      swaynotificationcenter
+      hyprshot
+      hyprlock
+      hypridle
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
