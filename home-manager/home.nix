@@ -60,6 +60,7 @@ in
       "${config.xdg.configHome}/tmux".source = ./dotfiles/tmux;
       "${config.xdg.configHome}/bottom".source = ./dotfiles/bottom;
       "${config.xdg.configHome}/nvim".source = ./dotfiles/nvim;
+      "${config.xdg.configHome}/hypr".source = ./dotfiles/hypr;
     };
 
     packages = with pkgs; [
@@ -91,6 +92,9 @@ in
       postgresql_17
       dig
       bash
+      kitty
+      wofi
+      dolphin
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
