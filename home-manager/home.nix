@@ -97,6 +97,7 @@ in
       wofi
       dolphin
       waybar
+      font-awesome
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
