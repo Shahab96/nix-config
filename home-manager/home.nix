@@ -62,6 +62,7 @@ in
       "${config.xdg.configHome}/nvim".source = ./dotfiles/nvim;
       "${config.xdg.configHome}/hypr".source = ./dotfiles/hypr;
       "${config.xdg.configHome}/waybar".source = ./dotfiles/waybar;
+      "${config.xdg.configHome}/wofi".source = ./dotfiles/wofi;
     };
 
     packages = with pkgs; [
@@ -102,6 +103,7 @@ in
       hyprshot
       hyprlock
       hypridle
+      pavucontrol
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
