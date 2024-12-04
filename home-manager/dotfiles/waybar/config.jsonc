@@ -18,7 +18,6 @@
         "cpu",
         "memory",
         "temperature",
-        "keyboard-state",
         "battery",
         "clock",
         "tray"
@@ -43,7 +42,7 @@
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
-        "format": "{name} {icon}",
+        "format": "{name} {icon} ",
         "format-icons": {
             "locked": "",
             "unlocked": ""
