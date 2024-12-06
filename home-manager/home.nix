@@ -103,6 +103,7 @@ in
       hyprshot
       hyprlock
       hypridle
+      hyprpolkitagent
       pavucontrol
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
