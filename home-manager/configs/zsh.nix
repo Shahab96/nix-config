@@ -7,14 +7,9 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtraFirst = ''
-      [[ "$TERM" == "linux" ]] && return
-    '';
-
     initExtra = ''
       source <(nh completions --shell zsh)
       eval "$(zoxide init zsh)"
-      [[ -z "$TERM" ]] && exec tmux
     '';
 
     shellAliases = {
