@@ -105,6 +105,7 @@ in
       hypridle
       hyprpolkitagent
       pavucontrol
+      tree
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
