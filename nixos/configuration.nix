@@ -131,6 +131,10 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  programs.nix-ld = {
+    enable = true;
+  };
+
   virtualisation = {
     podman = {
       enable = true;
