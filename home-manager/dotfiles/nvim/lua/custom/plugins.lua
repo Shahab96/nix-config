@@ -138,6 +138,8 @@ local plugins = {
         "ruff",
         "black",
         "debugpy",
+        "lua-language-server",
+        "nil",
       },
     },
   },
