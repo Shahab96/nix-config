@@ -106,6 +106,7 @@ in
       hyprpolkitagent
       pavucontrol
       tree
+      wl-clipboard-rs
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
