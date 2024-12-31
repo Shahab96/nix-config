@@ -52,16 +52,22 @@
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
-    videoDrivers = [ "amdgpu" ];
-
-    # Enable the GNOME Desktop Environment.
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
 
     # Configure keymap in X11
     xkb = {
       layout = "us";
       variant = "";
+    };
+  };
+
+  # Enable greetd and tuigreet
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome to NixOS!' --asterisks --remember --remember-user-session --time -cmd ${pkgs.hyprland}/bin/Hyprland";
+        user = "greeter";
+      };
     };
   };
 
