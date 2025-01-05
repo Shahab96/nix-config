@@ -81,6 +81,9 @@
   # Enable blueman
   services.blueman.enable = true;
 
+  # Enable smart card services
+  services.pcscd.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -107,6 +110,13 @@
   };
 
   security.rtkit.enable = true;
+
+  security.pam.yubico = {
+    enable = true;
+    debug = true;
+    mode = "challenge-response";
+    id = ["24353659"];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.shahab = {
