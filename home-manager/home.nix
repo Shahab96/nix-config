@@ -107,6 +107,7 @@ in
       pavucontrol
       tree
       wl-clipboard-rs
+      brightnessctl
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
