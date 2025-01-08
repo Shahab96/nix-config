@@ -140,6 +140,7 @@ local plugins = {
         "debugpy",
         "lua-language-server",
         "nil",
+        "phpactor",
       },
     },
   },
