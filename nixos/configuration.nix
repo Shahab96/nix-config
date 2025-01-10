@@ -100,6 +100,15 @@
     #media-session.enable = true;
   };
 
+  services.udev.extraRules = ''
+     ACTION=="remove",\
+     ENV{ID_BUS}=="usb",\
+     ENV{ID_MODEL_ID}=="0407",\
+     ENV{ID_VENDOR_ID}=="1050",\
+     ENV{ID_VENDOR}=="Yubico",\
+     RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+  '';
+
   # Enable sound with pipewire.
   hardware = {
     pulseaudio.enable = false;
@@ -126,7 +135,7 @@
 
     isNormalUser = true;
     description = "Shahab Dogar";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
   };
 
   # Allow unfree packages
@@ -136,6 +145,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pciutils
+    virt-manager
+    virt-viewer
+    spice 
+    spice-gtk
+    spice-protocol
+    win-virtio
+    win-spice
   ];
 
   programs._1password.enable = true;
@@ -145,6 +161,8 @@
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = [ "shahab" ];
   };
+
+  programs.dconf.enable = true;
 
   # Hyprland
   programs.hyprland = {
@@ -174,7 +192,23 @@
         search = ["docker.io"];
       };
     };
+
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+
+        ovmf = {
+          enable = true;
+          packages = with pkgs; [ OVMFFull.fd ];
+        };
+      };
+    };
+
+    spiceUSBRedirection.enable = true;
   };
+
+  services.spice-vdagentd.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
