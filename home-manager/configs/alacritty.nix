@@ -1,4 +1,4 @@
-{ config, pkgs, font, ... }:
+{ font, ... }:
 
 {
   programs.alacritty = {
