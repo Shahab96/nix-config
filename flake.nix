@@ -36,9 +36,7 @@
         ];
         specialArgs = {
           inherit inputs;
-          meta = {
-            hostname = host;
-          };
+          hostname = host;
         };
       };
     };
