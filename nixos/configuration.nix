@@ -121,7 +121,7 @@
     id = ["24353659"];
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with ‘mkpasswd’.
   users.users.shahab = {
     shell = pkgs.zsh;
 
