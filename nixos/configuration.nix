@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, hostname, pkgs, ... }:
 
 {
   imports =
@@ -18,7 +18,7 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-  networking.hostName = "rihla"; # Define your hostname.
+  networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -136,6 +136,7 @@
     isNormalUser = true;
     description = "Shahab Dogar";
     extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+    hashedPassword = "$6$.ZlYnf2cZph4tCbM$E/JJUDirRV8MZrgX4Rh.Pi1q95tev1ZxcKjPA1I.uURv56qoWcC39MJWO9S2T5MlkPVbSLGiM8Ihfz9mERImo/";
   };
 
   # Allow unfree packages
