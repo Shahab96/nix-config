@@ -2,8 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, inputs, pkgs, hostname, ... }:
+{ config, lib, inputs, pkgs, hostname, ... }:
 
+let
+  secretspath = builtins.toString inputs.nix-secrets;
+in
 {
   # Bootloader.
   boot = {
@@ -134,6 +137,8 @@
     id = ["24353659"];
   };
 
+  users.mutableUsers = false;
+
   # Define a user account. Don't forget to set a password with ‘mkpasswd’.
   users.users.shahab = {
     shell = pkgs.zsh;
@@ -144,7 +149,21 @@
     isNormalUser = true;
     description = "Shahab Dogar";
     extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
-    hashedPassword = "$6$.ZlYnf2cZph4tCbM$E/JJUDirRV8MZrgX4Rh.Pi1q95tev1ZxcKjPA1I.uURv56qoWcC39MJWO9S2T5MlkPVbSLGiM8Ihfz9mERImo/";
+    hashedPasswordFile = config.sops.secrets.shahab_passwd.path;
+  };
+
+  sops = {
+    defaultSopsFile = "${secretspath}/secrets.yaml";
+    age = {
+      sshKeyPaths = ["/home/shahab/.ssh/id_ed25519"];
+      keyFile = "/home/shahab/.config/sops/age/key.txt";
+      generateKey = true;
+    };
+    secrets = {
+      shahab_passwd = {
+        neededForUsers = true;
+      };
+    };
   };
 
   # Allow unfree packages

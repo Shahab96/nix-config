@@ -402,6 +402,24 @@
         "type": "github"
       }
     },
+    "nix-secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738498247,
+        "narHash": "sha256-xMq5P/UOmLy5iaQo6/5X4JK1MNnmL7EJAfWqPmjtRMQ=",
+        "ref": "main",
+        "rev": "270597e8706aead70607fbed0a78366ed9c2b3c5",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@git.dogar.dev/shahab/nix-secrets"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@git.dogar.dev/shahab/nix-secrets"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1738471961,
@@ -539,8 +557,10 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "lanzaboote": "lanzaboote",
+        "nix-secrets": "nix-secrets",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "sops-nix": "sops-nix"
       }
     },
     "rust-overlay": {
@@ -561,6 +581,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1738291974,
+        "narHash": "sha256-wkwYJc8cKmmQWUloyS9KwttBnja2ONRuJQDEsmef320=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "4c1251904d8a08c86ac6bc0d72cc09975e89aef7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
         "type": "github"
       }
     },

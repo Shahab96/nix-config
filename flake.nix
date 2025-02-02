@@ -32,6 +32,12 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Secrets
+    nix-secrets = {
+      url = "git+ssh://git@git.dogar.dev/shahab/nix-secrets?shallow=1&ref=main";
+      flake = false;
+    };
   };
 
   outputs = {
