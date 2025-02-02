@@ -9,7 +9,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Hyprland cachix flake
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # NixOS community managed hardware specific features/fixes
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # Secure boot
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Disko
     disko = {
@@ -23,6 +33,8 @@
     nixpkgs,
     home-manager,
     disko,
+    lanzaboote,
+    nixos-hardware,
     ...
   } @ inputs:
   let
@@ -35,7 +47,9 @@
       "${host}" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-           disko.nixosModules.disko
+          lanzaboote.nixosModules.lanzaboote
+          disko.nixosModules.disko
+          nixos-hardware.nixosModules.framework-13-7040-amd
           ./nixos/configuration.nix
           ./nixos/disko-config.nix
           ./nixos/hardware-configuration.nix

@@ -2,12 +2,22 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, pkgs, hostname, ... }:
+{ lib, inputs, pkgs, hostname, ... }:
 
 {
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      # Set this to true on first install. This must be false for secure boot.
+      systemd-boot.enable = lib.mkForce false;
+      efi.canTouchEfiVariables = true;
+    };
+
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+  };
 
   # Bluetooth.
   hardware.bluetooth.enable = true;
@@ -79,6 +89,9 @@
   # Enable smart card services
   services.pcscd.enable = true;
 
+  # Framework firmware updating
+  services.fwupd.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -148,6 +161,7 @@
     spice-protocol
     win-virtio
     win-spice
+    sbctl # Secure boot
   ];
 
   programs._1password.enable = true;
