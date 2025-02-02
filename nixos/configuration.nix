@@ -80,6 +80,8 @@ in
   # Framework firmware updating
   services.fwupd.enable = true;
 
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -96,8 +98,6 @@ in
      RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
   '';
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   hardware = {
     # Bluetooth.
     bluetooth.enable = true;
@@ -164,7 +164,18 @@ in
     win-virtio
     win-spice
     sbctl # Secure boot
+
+    # Gaming stuff
+    mangohud
+    protonup-qt
   ];
+
+  # Enable steam for gaming
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+  programs.gamemode.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
