@@ -84,8 +84,6 @@
 
     devShell.x86_64-linux = pkgs.mkShell {
       buildInputs = with pkgs; [
-        # Adding node for copilot
-        nodejs_20
         nil
       ];
     };
