@@ -106,6 +106,7 @@ in
       tree
       wl-clipboard-rs
       brightnessctl
+      age
 
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
