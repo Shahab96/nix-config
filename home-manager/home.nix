@@ -41,7 +41,9 @@ in
     };
   };
 
-  fonts.fontconfig.enable = true;
+  fonts = {
+    fontconfig.enable = true;
+  };
 
   home = {
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
@@ -107,8 +109,7 @@ in
       wl-clipboard-rs
       brightnessctl
       age
-
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      nerd-fonts.jetbrains-mono
     ];
   };
 

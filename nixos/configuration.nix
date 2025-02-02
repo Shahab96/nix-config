@@ -22,10 +22,6 @@ in
     };
   };
 
-  # Bluetooth.
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
   networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -98,8 +94,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  sound.enable = false;
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -116,9 +110,14 @@ in
      RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
   '';
 
+  services.pulseaudio.enable = false;
+
   # Enable sound with pipewire.
   hardware = {
-    pulseaudio.enable = false;
+    # Bluetooth.
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+
     graphics = {
       enable = true;
       extraPackages = with pkgs; [ amdvlk ];
