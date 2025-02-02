@@ -57,17 +57,6 @@ in
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
-
   # Enable greetd and tuigreet
   services.greetd = {
     enable = true;
@@ -91,9 +80,6 @@ in
   # Framework firmware updating
   services.fwupd.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -110,9 +96,8 @@ in
      RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
   '';
 
-  services.pulseaudio.enable = false;
-
   # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
   hardware = {
     # Bluetooth.
     bluetooth.enable = true;
@@ -133,8 +118,6 @@ in
   };
 
   users.mutableUsers = false;
-
-  # Define a user account. Don't forget to set a password with ‘mkpasswd’.
   users.users.shahab = {
     shell = pkgs.zsh;
 
