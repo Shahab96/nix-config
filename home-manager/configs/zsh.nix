@@ -20,8 +20,8 @@
       du = "dust";
       rm = "rip";
       cp = "xcp";
-      uo = "nh os switch ~/.dotfiles";
-      uh = "nh home switch ~/.dotfiles";
+      uo = "nh os switch ~/nix-config";
+      uh = "nh home switch ~/nix-config";
       k = "kubectl";
     };
 
