@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Sops
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Disko
     disko = {
       url = "github:nix-community/disko";
@@ -35,6 +41,7 @@
     disko,
     lanzaboote,
     nixos-hardware,
+    sops-nix,
     ...
   } @ inputs:
   let
@@ -50,6 +57,7 @@
           lanzaboote.nixosModules.lanzaboote
           disko.nixosModules.disko
           nixos-hardware.nixosModules.framework-13-7040-amd
+          sops-nix.nixosModules.sops
           ./nixos/configuration.nix
           ./nixos/disko-config.nix
           ./nixos/hardware-configuration.nix
