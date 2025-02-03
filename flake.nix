@@ -43,11 +43,6 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
-    disko,
-    lanzaboote,
-    nixos-hardware,
-    sops-nix,
     ...
   } @ inputs:
   let
@@ -60,10 +55,10 @@
       "${host}" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          lanzaboote.nixosModules.lanzaboote
-          disko.nixosModules.disko
-          nixos-hardware.nixosModules.framework-13-7040-amd
-          sops-nix.nixosModules.sops
+          inputs.lanzaboote.nixosModules.lanzaboote
+          inputs.disko.nixosModules.disko
+          inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+          inputs.sops-nix.nixosModules.sops
           ./nixos/configuration.nix
           ./nixos/disko-config.nix
           ./nixos/hardware-configuration.nix
@@ -76,7 +71,7 @@
     };
 
     homeConfigurations = {
-      "${user}" = home-manager.lib.homeManagerConfiguration {
+      "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home-manager/home.nix ];
       };
