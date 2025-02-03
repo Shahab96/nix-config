@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk = {
-      vdb = {
+      main = {
         type = "disk";
         device = "/dev/nvme0n1";
         content = {
@@ -11,7 +11,7 @@
               priority = 1;
               name = "ESP";
               start = "1M";
-              end = "128M";
+              end = "512M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -41,13 +41,9 @@
                       mountpoint = "/nix";
                       mountOptions = ["subvol=nix" "compress=zstd" "noatime"];
                     };
-                    "/log" = {
-                      mountpoint = "/var/log";
-                      mountOptions = ["subvol=log" "compress=zstd" "noatime"];
-                    };
-                    "/persist" = {
-                      mountpoint = "/persist";
-                      mountOptions = ["subvol=persist" "compress=zstd" "noatime"];
+                    "/persistant" = {
+                      mountpoint = "/persistant";
+                      mountOptions = ["subvol=persistant" "compress=zstd" "noatime"];
                     };
                     "/swap" = {
                       mountpoint = "/swap";
@@ -63,6 +59,5 @@
     };
   };
 
-  fileSystems."/persist".neededForBoot = true;
-  fileSystems."/var/log".neededForBoot = true;
+  fileSystems."/persistant".neededForBoot = true;
 }
