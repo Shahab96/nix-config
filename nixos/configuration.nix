@@ -12,14 +12,13 @@ in
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = true;
-      # systemd-boot.enable = lib.mkForce false;
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
     };
 
     lanzaboote = {
-      enable = false;
-      pkiBundle = "/etc/secureboot";
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
     };
   };
 
