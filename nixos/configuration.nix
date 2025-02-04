@@ -164,6 +164,7 @@ in
     win-spice
     sops
     sbctl # Secure boot
+    yubikey-manager
 
     # Gaming stuff
     mangohud
