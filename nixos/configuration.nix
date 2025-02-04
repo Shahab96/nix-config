@@ -126,18 +126,18 @@ in
     isNormalUser = true;
     description = "Shahab Dogar";
     extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
-    hashedPasswordFile = config.sops.secrets.shahab_passwd.path;
+    hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
   };
 
   sops = {
     defaultSopsFile = "${secretspath}/secrets.yaml";
     age = {
       sshKeyPaths = ["/home/shahab/.ssh/id_ed25519"];
-      keyFile = "/home/shahab/.config/sops/age/key.txt";
+      keyFile = "/home/shahab/.config/sops/age/keys.txt";
       generateKey = true;
     };
     secrets = {
-      shahab_passwd = {
+      "user_passwords/shahab" = {
         neededForUsers = true;
       };
     };
@@ -162,6 +162,7 @@ in
     spice-protocol
     win-virtio
     win-spice
+    sops
     sbctl # Secure boot
 
     # Gaming stuff
