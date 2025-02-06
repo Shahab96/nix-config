@@ -120,6 +120,7 @@ in {
     id = ["24353659"];
   };
 
+  users.mutableUsers = false;
   users.users.shahab = {
     shell = pkgs.zsh;
 
