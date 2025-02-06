@@ -24,9 +24,9 @@
               content = {
                 name = "crypted";
                 type = "luks";
-                askPassword = true;
                 settings = {
                   allowDiscards = true;
+                  keyFile = "/tmp/secret.key";
                   crypttabExtraOpts = [
                     "fido2-device=auto"
                     "token-timeout=10"
@@ -39,10 +39,6 @@
                     "/root" = {
                       mountpoint = "/";
                       mountOptions = ["subvol=root" "compress=zstd" "noatime"];
-                    };
-                    "/home" = {
-                      mountpoint = "/home";
-                      mountOptions = ["subvol=home" "compress=zstd" "noatime"];
                     };
                     "/nix" = {
                       mountpoint = "/nix";
