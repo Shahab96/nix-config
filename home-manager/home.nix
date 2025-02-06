@@ -114,6 +114,7 @@ in {
       brightnessctl
       age
       nerd-fonts.jetbrains-mono
+      obsidian
     ];
   };
 
