@@ -1,13 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, lib, inputs, pkgs, hostname, ... }:
-
-let
-  secretspath = builtins.toString inputs.nix-secrets;
-in
 {
+  config,
+  lib,
+  inputs,
+  pkgs,
+  hostname,
+  ...
+}: let
+  secretspath = builtins.toString inputs.nix-secrets;
+in {
   # Bootloader.
   boot = {
     loader = {
@@ -54,7 +57,7 @@ in
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
   };
 
   # Enable greetd and tuigreet
@@ -90,12 +93,12 @@ in
   };
 
   services.udev.extraRules = ''
-     ACTION=="remove",\
-     ENV{ID_BUS}=="usb",\
-     ENV{ID_MODEL_ID}=="0407",\
-     ENV{ID_VENDOR_ID}=="1050",\
-     ENV{ID_VENDOR}=="Yubico",\
-     RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+    ACTION=="remove",\
+    ENV{ID_BUS}=="usb",\
+    ENV{ID_MODEL_ID}=="0407",\
+    ENV{ID_VENDOR_ID}=="1050",\
+    ENV{ID_VENDOR}=="Yubico",\
+    RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
   '';
 
   hardware = {
@@ -105,7 +108,7 @@ in
 
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [ amdvlk ];
+      extraPackages = with pkgs; [amdvlk];
     };
   };
 
@@ -125,7 +128,8 @@ in
 
     isNormalUser = true;
     description = "Shahab Dogar";
-    extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+    extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
+    initialHashedPassword = "$y$j9T$jSC0CJxh6O.Q3TEOVZR8l.$7kFf9u4Lh.aIH6o/15wFLW7OKPzoUEpWVN5B9wHEaw4";
     hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
   };
 
@@ -157,7 +161,7 @@ in
     pciutils
     virt-manager
     virt-viewer
-    spice 
+    spice
     spice-gtk
     spice-protocol
     win-virtio
@@ -183,7 +187,7 @@ in
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = [ "shahab" ];
+    polkitPolicyOwners = ["shahab"];
   };
 
   programs.dconf.enable = true;
@@ -224,7 +228,7 @@ in
 
         ovmf = {
           enable = true;
-          packages = with pkgs; [ OVMFFull.fd ];
+          packages = with pkgs; [OVMFFull.fd];
         };
       };
     };
