@@ -1,17 +1,23 @@
 {
+  device ? throw "Set this to your disk device, e.g. /dev/sda",
+  ...
+}: {
   disko.devices = {
     disk = {
       main = {
+        inherit device;
         type = "disk";
-        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
-            ESP = {
-              priority = 1;
+            boot = {
+              name = "boot";
+              size = "1M";
+              type = "EF02";
+            };
+            esp = {
               name = "ESP";
-              start = "1M";
-              end = "512M";
+              size = "500M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -38,15 +44,26 @@
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
-                      mountOptions = ["subvol=root" "compress=zstd" "noatime"];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "/nix" = {
                       mountpoint = "/nix";
-                      mountOptions = ["subvol=nix" "compress=zstd" "noatime"];
+                      mountOptions = [
+                        "subvol=nix"
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "/persistant" = {
                       mountpoint = "/persistant";
-                      mountOptions = ["subvol=persistant" "compress=zstd" "noatime"];
+                      mountOptions = [
+                        "subvol=persistant"
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "/swap" = {
                       mountpoint = "/swap";
