@@ -1,7 +1,4 @@
-{
-  device ? throw "Set this to your disk device, e.g. /dev/sda",
-  ...
-}: {
+{device ? throw "Set this to your disk device, e.g. /dev/sda", ...}: {
   disko.devices = {
     disk = {
       main = {
@@ -39,37 +36,8 @@
                   ];
                 };
                 content = {
-                  type = "btrfs";
-                  extraArgs = ["-L" "nixos" "-f"];
-                  subvolumes = {
-                    "/root" = {
-                      mountpoint = "/";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                    "/nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "subvol=nix"
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                    "/persistant" = {
-                      mountpoint = "/persistant";
-                      mountOptions = [
-                        "subvol=persistant"
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                    "/swap" = {
-                      mountpoint = "/swap";
-                      swap.swapfile.size = "64G";
-                    };
-                  };
+                  type = "lvm_pv";
+                  vg = "luks_vg";
                 };
               };
             };
@@ -78,6 +46,46 @@
       };
     };
   };
-
-  fileSystems."/persistant".neededForBoot = true;
+  lvm_vg = {
+    luks_vg = {
+      type = "lvm_vg";
+      lvs = {
+        swap = {
+          size = "64G";
+          content = {
+            type = "swap";
+            resumeDevice = true;
+          };
+        };
+        root = {
+          size = "100%FREE";
+          content = {
+            type = "btrfs";
+            extraArgs = ["-L" "nixos" "-f"];
+            subvolumes = {
+              "/root" = {
+                mountpoint = "/";
+              };
+              "/nix" = {
+                mountpoint = "/nix";
+                mountOptions = [
+                  "subvol=nix"
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
+              "/persistant" = {
+                mountpoint = "/persistant";
+                mountOptions = [
+                  "subvol=persistant"
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
+            };
+          };
+        };
+      };
+    };
+  };
 }

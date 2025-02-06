@@ -40,12 +40,7 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs:
-  let
+  outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
     host = "rihla";
     user = "shahab";
@@ -73,7 +68,7 @@
     homeConfigurations = {
       "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home-manager/home.nix ];
+        modules = [./home-manager/home.nix];
       };
     };
 

@@ -5,22 +5,26 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   # Be sure to actually install the font first!
   font = "ComicCodeLigatures";
   username = "shahab";
   email = "shahab@dogar.dev";
   fullName = "Shahab Dogar";
-in
-{
+in {
   # You can import other home-manager modules here
   imports = [
     # Custom import to configure font
-    (import ./configs/alacritty.nix { inherit pkgs config; font = font; })
+    (import ./configs/alacritty.nix {
+      inherit pkgs config font;
+    })
 
     # Custom import for username and email
-    (import ./configs/git.nix { inherit pkgs config lib; userEmail = email; userName = fullName; })
+    (import ./configs/git.nix {
+      inherit pkgs config lib;
+      userEmail = email;
+      userName = fullName;
+    })
 
     ./configs/firefox.nix
     ./configs/direnv.nix
@@ -46,10 +50,10 @@ in
   };
 
   home = {
+    inherit username;
+
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";
-
-    username = username;
     homeDirectory = "/home/${username}";
     sessionVariables = {
       EDITOR = "nvim";
