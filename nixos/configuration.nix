@@ -15,12 +15,12 @@ in {
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = lib.mkForce false;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
     lanzaboote = {
-      enable = true;
+      enable = false;
       pkiBundle = "/var/lib/sbctl";
     };
   };
@@ -129,7 +129,7 @@ in {
     isNormalUser = true;
     description = "Shahab Dogar";
     extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
-    initialHashedPassword = "$y$j9T$jSC0CJxh6O.Q3TEOVZR8l.$7kFf9u4Lh.aIH6o/15wFLW7OKPzoUEpWVN5B9wHEaw4";
+    initialPassword = "tempPass";
     hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
   };
 
