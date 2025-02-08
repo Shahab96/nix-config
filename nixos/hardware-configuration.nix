@@ -9,7 +9,7 @@
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  fileSystems."/persistant".neededForBoot = true;
+  fileSystems."/persistent".neededForBoot = true;
   boot = {
     initrd = {
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "thunderbolt" "usb_storage" "sd_mod"];

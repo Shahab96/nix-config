@@ -209,7 +209,6 @@ in {
       "/var/lib/nixos"
       "/var/lib/sbctl"
       "/var/lib/systemd/coredump"
-      "/var/lib/sbctl"
       "/etc/NetworkManager/system-connections"
     ];
     files = [
@@ -218,15 +217,13 @@ in {
     users.shahab = {
       directories = [
         "Downloads"
-	"nix-config"
-	"nix-secrets"
+        "nix-config"
+        "nix-secrets"
         ".config"
+        ".local/share"
+        ".1Password"
+        ".steam"
         { directory = ".ssh"; mode = "0700"; }
-        { directory = ".steam"; mode = "0700"; }
-        { directory = ".local/share/Steam"; mode = "0700"; }
-        { directory = ".local/share/nvim"; mode = "0700"; }
-        { directory = ".local/share/direnv"; mode = "0700"; }
-        { directory = ".1Password"; mode = "0700"; }
       ];
     };
   };

@@ -74,10 +74,10 @@
                       "noatime"
                     ];
                   };
-                  "/persistant" = {
-                    mountpoint = "/persistant";
+                  "/persistent" = {
+                    mountpoint = "/persistent";
                     mountOptions = [
-                      "subvol=persistant"
+                      "subvol=persistent"
                       "compress=zstd"
                       "noatime"
                     ];
