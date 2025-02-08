@@ -15,7 +15,7 @@ in {
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = lib.mkForce false;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
@@ -45,7 +45,7 @@ in {
     '';
 
     lanzaboote = {
-      enable = true;
+      enable = false;
       pkiBundle = "/var/lib/sbctl";
     };
   };
@@ -201,7 +201,7 @@ in {
     protonup-qt
   ];
 
-  environment.persistence."/persistant" = {
+  environment.persistence."/persistent" = {
     hideMounts = true;
     directories = [
       "/var/log"
@@ -209,6 +209,7 @@ in {
       "/var/lib/nixos"
       "/var/lib/sbctl"
       "/var/lib/systemd/coredump"
+      "/var/lib/sbctl"
       "/etc/NetworkManager/system-connections"
     ];
     files = [
