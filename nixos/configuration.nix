@@ -15,7 +15,7 @@ in {
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = true;
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
     };
 
@@ -45,7 +45,7 @@ in {
     '';
 
     lanzaboote = {
-      enable = false;
+      enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
   };
@@ -217,6 +217,7 @@ in {
     users.shahab = {
       directories = [
         "Downloads"
+        "Knowledge"
         "nix-config"
         "nix-secrets"
         ".config"
