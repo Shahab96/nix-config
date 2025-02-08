@@ -19,6 +19,31 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
+    initrd.postResumeCommands = lib.mkAfter ''
+      mkdir /btrfs_tmp
+      mount /dev/luks_vg/root /btrfs_tmp
+      if [[ -e /btrfs_tmp/root ]]; then
+          mkdir -p /btrfs_tmp/old_roots
+          timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+          mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+      fi
+
+      delete_subvolume_recursively() {
+          IFS=$'\n'
+          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+              delete_subvolume_recursively "/btrfs_tmp/$i"
+          done
+          btrfs subvolume delete "$1"
+      }
+
+      for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+          delete_subvolume_recursively "$i"
+      done
+
+      btrfs subvolume create /btrfs_tmp/root
+      umount /btrfs_tmp
+    '';
+
     lanzaboote = {
       enable = true;
       pkiBundle = "/var/lib/sbctl";
@@ -175,6 +200,35 @@ in {
     mangohud
     protonup-qt
   ];
+
+  environment.persistence."/persistant" = {
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      "/var/lib/sbctl"
+      "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      "/etc/machine-id"
+    ];
+    users.shahab = {
+      directories = [
+        "Downloads"
+	"nix-config"
+	"nix-secrets"
+        ".config"
+        { directory = ".ssh"; mode = "0700"; }
+        { directory = ".steam"; mode = "0700"; }
+        { directory = ".local/share/Steam"; mode = "0700"; }
+        { directory = ".local/share/nvim"; mode = "0700"; }
+        { directory = ".local/share/direnv"; mode = "0700"; }
+        { directory = ".1Password"; mode = "0700"; }
+      ];
+    };
+  };
 
   # Enable steam for gaming
   programs.steam = {
