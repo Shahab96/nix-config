@@ -131,7 +131,6 @@ in {
     age = {
       sshKeyPaths = ["/home/shahab/.ssh/id_ed25519"];
       keyFile = "/home/shahab/.config/sops/age/keys.txt";
-      generateKey = true;
     };
     secrets = {
       "user_passwords/shahab" = {
