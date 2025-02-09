@@ -105,6 +105,7 @@ in {
 
   security.rtkit.enable = true;
 
+  users.mutableUsers = false;
   users.users.shahab = {
     shell = pkgs.zsh;
 
