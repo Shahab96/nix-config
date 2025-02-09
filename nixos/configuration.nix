@@ -221,8 +221,8 @@ in {
         "nix-config"
         "nix-secrets"
         ".config"
-        ".local/share"
-        ".1Password"
+        ".local"
+        ".1password"
         ".steam"
         { directory = ".ssh"; mode = "0700"; }
       ];
