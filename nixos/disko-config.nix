@@ -85,14 +85,6 @@
                       "noatime"
                     ];
                   };
-                  "@var/log" = {
-                    mountpoint = "/var/log";
-                    mountOptions = [
-                      "subvol=syslogs"
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
                 };
               };
             };
