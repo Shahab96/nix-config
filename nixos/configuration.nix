@@ -92,15 +92,6 @@ in {
     pulse.enable = true;
   };
 
-  services.udev.extraRules = ''
-    ACTION=="remove",\
-    ENV{ID_BUS}=="usb",\
-    ENV{ID_MODEL_ID}=="0407",\
-    ENV{ID_VENDOR_ID}=="1050",\
-    ENV{ID_VENDOR}=="Yubico",\
-    RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
-  '';
-
   hardware = {
     # Bluetooth.
     bluetooth.enable = true;
@@ -113,12 +104,6 @@ in {
   };
 
   security.rtkit.enable = true;
-
-  security.pam.yubico = {
-    enable = true;
-    mode = "challenge-response";
-    id = ["24353659"];
-  };
 
   users.users.shahab = {
     shell = pkgs.zsh;
@@ -255,10 +240,10 @@ in {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [22];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
