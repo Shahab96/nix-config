@@ -33,12 +33,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Impermanence
-    impermanence.url = "github:nix-community/impermanence";
-
     # Secrets
     nix-secrets = {
-      url = "git+ssh://git@git.dogar.dev/shahab/nix-secrets?shallow=1&ref=main";
+      url = "git+ssh://git@git.dogar.dev:shahab/nix-secrets?shallow=1&ref=main";
       flake = false;
     };
   };
@@ -57,7 +54,6 @@
           inputs.disko.nixosModules.disko
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           inputs.sops-nix.nixosModules.sops
-          inputs.impermanence.nixosModules.impermanence
           ./nixos/configuration.nix
           ./nixos/disko-config.nix
           ./nixos/hardware-configuration.nix
