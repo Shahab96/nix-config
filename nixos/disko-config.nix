@@ -38,7 +38,7 @@
                   };
                   content = {
                     type = "lvm_pv";
-                    vg = "luks_vg";
+                    vg = "crypt_vg";
                   };
                 };
               };
@@ -47,7 +47,7 @@
         };
       };
       lvm_vg = {
-        luks_vg = {
+        crypt_vg = {
           type = "lvm_vg";
           lvs = {
             swap = {
@@ -57,16 +57,27 @@
                 resumeDevice = true;
               };
             };
-            root = {
+            main = {
               size = "100%";
               content = {
                 type = "btrfs";
                 extraArgs = ["-L" "nixos" "-f"];
                 subvolumes = {
-                  "/root" = {
+                  "@root" = {
                     mountpoint = "/";
+                    mountOptions = [
+                      "compress=zstd"
+                    ];
                   };
-                  "/nix" = {
+                  "@home" = {
+                    mountpoint = "/home";
+                    mountOptions = [
+                      "subvol=home"
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "@nix" = {
                     mountpoint = "/nix";
                     mountOptions = [
                       "subvol=nix"
@@ -74,10 +85,10 @@
                       "noatime"
                     ];
                   };
-                  "/persistent" = {
-                    mountpoint = "/persistent";
+                  "@var/log" = {
+                    mountpoint = "/var/log";
                     mountOptions = [
-                      "subvol=persistent"
+                      "subvol=syslogs"
                       "compress=zstd"
                       "noatime"
                     ];

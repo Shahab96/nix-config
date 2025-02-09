@@ -15,37 +15,12 @@ in {
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = lib.mkForce false;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
-    # initrd.postResumeCommands = lib.mkAfter ''
-    #   mkdir /btrfs_tmp
-    #   mount /dev/luks_vg/root /btrfs_tmp
-    #   if [[ -e /btrfs_tmp/root ]]; then
-    #       mkdir -p /btrfs_tmp/old_roots
-    #       timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-    #       mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-    #   fi
-    #
-    #   delete_subvolume_recursively() {
-    #       IFS=$'\n'
-    #       for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-    #           delete_subvolume_recursively "/btrfs_tmp/$i"
-    #       done
-    #       btrfs subvolume delete "$1"
-    #   }
-    #
-    #   for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-    #       delete_subvolume_recursively "$i"
-    #   done
-    #
-    #   btrfs subvolume create /btrfs_tmp/root
-    #   umount /btrfs_tmp
-    # '';
-
     lanzaboote = {
-      enable = true;
+      enable = false;
       pkiBundle = "/var/lib/sbctl";
     };
   };
@@ -145,7 +120,6 @@ in {
     id = ["24353659"];
   };
 
-  users.mutableUsers = false;
   users.users.shahab = {
     shell = pkgs.zsh;
 
@@ -156,7 +130,13 @@ in {
     description = "Shahab Dogar";
     extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
     initialPassword = "tempPass";
-    hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
+    #hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
+
+    openssh.authorizedKeys = {
+      keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBijtTtb6UT5gssWolNGX1rcjAKsdtfz25fZMMnzq4v"
+      ];
+    };
   };
 
   sops = {
@@ -200,35 +180,6 @@ in {
     mangohud
     protonup-qt
   ];
-
-  environment.persistence."/persistent" = {
-    hideMounts = true;
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/sbctl"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-    ];
-    files = [
-      "/etc/machine-id"
-    ];
-    users.shahab = {
-      directories = [
-        "Downloads"
-        "Knowledge"
-        "nix-config"
-        "nix-secrets"
-        ".config"
-        ".local"
-        ".1password"
-        ".steam"
-        ".mozilla"
-        { directory = ".ssh"; mode = "0700"; }
-      ];
-    };
-  };
 
   # Enable steam for gaming
   programs.steam = {
