@@ -239,12 +239,6 @@ local plugins = {
     end
   },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-  },
-  {
     "laytan/cloak.nvim",
     lazy = false,
     config = function ()
