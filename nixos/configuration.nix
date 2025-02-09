@@ -224,6 +224,7 @@ in {
         ".local"
         ".1password"
         ".steam"
+        ".mozilla"
         { directory = ".ssh"; mode = "0700"; }
       ];
     };
