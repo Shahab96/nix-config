@@ -8,7 +8,7 @@
   pkgs,
   hostname,
   ...
-}: 
+}:
 
 {
   # Bootloader.
@@ -55,9 +55,12 @@
 
   # Enable flakes
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    experimental-features = ["nix-command" "flakes"];
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   # Enable greetd and tuigreet
@@ -99,7 +102,7 @@
 
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [amdvlk];
+      extraPackages = with pkgs; [ amdvlk ];
     };
   };
 
@@ -114,7 +117,12 @@
 
     isNormalUser = true;
     description = "Shahab Dogar";
-    extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "libvirtd"
+    ];
     hashedPassword = "$y$j9T$pvjyL7hL5x2VBarGNTnMl1$mLA2UsWTbfp8Hgp/ug5l8224thi..Mo8.p7ME.tDZ.4";
 
     openssh.authorizedKeys = {
@@ -165,7 +173,7 @@
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = ["shahab"];
+    polkitPolicyOwners = [ "shahab" ];
   };
 
   programs.dconf.enable = true;
@@ -174,7 +182,8 @@
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   programs.nix-ld = {
@@ -195,7 +204,7 @@
 
     containers = {
       registries = {
-        search = ["docker.io"];
+        search = [ "docker.io" ];
       };
     };
 
@@ -206,7 +215,7 @@
 
         ovmf = {
           enable = true;
-          packages = with pkgs; [OVMFFull.fd];
+          packages = with pkgs; [ OVMFFull.fd ];
         };
       };
     };
@@ -230,7 +239,7 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

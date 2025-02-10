@@ -40,43 +40,47 @@
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
-    system = "x86_64-linux";
-    host = "rihla";
-    user = "shahab";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations = {
-      "${host}" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.disko.nixosModules.disko
-          inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-          inputs.sops-nix.nixosModules.sops
-          ./nixos/configuration.nix
-          ./nixos/disko-config.nix
-          ./nixos/hardware-configuration.nix
-        ];
-        specialArgs = {
-          inherit inputs;
-          hostname = host;
+  outputs =
+    { nixpkgs, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      host = "rihla";
+      user = "shahab";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      nixosConfigurations = {
+        "${host}" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            inputs.lanzaboote.nixosModules.lanzaboote
+            inputs.disko.nixosModules.disko
+            inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+            inputs.sops-nix.nixosModules.sops
+            ./nixos/configuration.nix
+            ./nixos/disko-config.nix
+            ./nixos/hardware-configuration.nix
+          ];
+          specialArgs = {
+            inherit inputs;
+            hostname = host;
+          };
         };
       };
-    };
 
-    homeConfigurations = {
-      "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./home-manager/home.nix];
+      homeConfigurations = {
+        "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home-manager/home.nix ];
+        };
+      };
+
+      devShell.x86_64-linux = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          nil
+          nixfmt-rfc-style
+          lua-language-server
+        ];
       };
     };
-
-    devShell.x86_64-linux = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        nil
-        lua-language-server
-      ];
-    };
-  };
 }
