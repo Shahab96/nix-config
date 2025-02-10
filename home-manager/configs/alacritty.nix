@@ -1,6 +1,4 @@
-{ font, ... }:
-
-{
+{font, ...}: {
   programs.alacritty = {
     enable = true;
 

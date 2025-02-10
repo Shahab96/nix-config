@@ -4,9 +4,7 @@
   userName,
   userEmail,
   ...
-}:
-
-{
+}: {
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;

@@ -5,15 +5,13 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   # Be sure to actually install the font first!
   font = "ComicCodeLigatures";
   username = "shahab";
   email = "shahab@dogar.dev";
   fullName = "Shahab Dogar";
-in
-{
+in {
   # You can import other home-manager modules here
   imports = [
     # Custom import to configure font

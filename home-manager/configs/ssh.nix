@@ -1,9 +1,6 @@
-{ ... }:
-
-let
+{...}: let
   onePassPath = "~/.1password/agent.sock";
-in
-{
+in {
   programs.ssh = {
     enable = true;
     extraConfig = "IdentityAgent ${onePassPath}";
