@@ -61,3 +61,19 @@ lspconfig.pyright.setup {
 }
 
 lspconfig.gleam.setup({})
+
+lspconfig.nil_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  autostart = true,
+  cmd = { "nil" },
+  filetypes = { "nix" },
+  settings = {
+    ['nil'] = {
+      testSetting = 42,
+      formatting = {
+        command = { "nixfmt" },
+      },
+    },
+  },
+}
