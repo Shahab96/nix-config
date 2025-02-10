@@ -116,7 +116,7 @@ in {
     description = "Shahab Dogar";
     extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
     initialPassword = "tempPass";
-    # hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
+    hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
 
     openssh.authorizedKeys = {
       keys = [
