@@ -8,9 +8,9 @@
   pkgs,
   hostname,
   ...
-}: let
-  secretspath = builtins.toString inputs.nix-secrets;
-in {
+}: 
+
+{
   # Bootloader.
   boot = {
     loader = {
@@ -115,27 +115,13 @@ in {
     isNormalUser = true;
     description = "Shahab Dogar";
     extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
-    initialPassword = "tempPass";
-    hashedPasswordFile = config.sops.secrets."user_passwords/shahab".path;
+    hashedPassword = "$y$j9T$pvjyL7hL5x2VBarGNTnMl1$mLA2UsWTbfp8Hgp/ug5l8224thi..Mo8.p7ME.tDZ.4";
 
     openssh.authorizedKeys = {
       keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBijtTtb6UT5gssWolNGX1rcjAKsdtfz25fZMMnzq4v"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGD/V4jLpuk7uAovkbHFr6uulfBKZmsH+BqmXIR2aYD0"
       ];
-    };
-  };
-
-  sops = {
-    defaultSopsFile = "${secretspath}/secrets.yaml";
-    age = {
-      sshKeyPaths = ["/home/shahab/.ssh/id_ed25519"];
-      keyFile = "/home/shahab/.config/sops/age/keys.txt";
-    };
-    secrets = {
-      "user_passwords/shahab" = {
-        neededForUsers = true;
-      };
     };
   };
 
