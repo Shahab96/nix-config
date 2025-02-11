@@ -38,6 +38,9 @@
       url = "git+ssh://git@git.dogar.dev/shahab/nix-secrets?shallow=1&ref=main";
       flake = false;
     };
+
+    # Nvf
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
@@ -67,7 +70,10 @@
     homeConfigurations = {
       "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [./home-manager/home.nix];
+        modules = [
+          inputs.nvf.homeManagerModules.default
+          ./home-manager/home.nix
+        ];
       };
     };
 
