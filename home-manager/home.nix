@@ -32,6 +32,7 @@ in {
     ./configs/nvim.nix
     ./configs/starship.nix
     ./configs/zsh.nix
+    ./configs/btop.nix
   ];
 
   nixpkgs = {
