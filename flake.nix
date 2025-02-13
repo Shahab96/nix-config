@@ -38,9 +38,6 @@
       url = "git+ssh://git@git.dogar.dev/shahab/nix-secrets?shallow=1&ref=main";
       flake = false;
     };
-
-    # Nvf
-    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
