@@ -140,6 +140,11 @@ button:hover {
   border-bottom: 2px solid @sapphire;
 }
 
+#backlight {
+  color: @sky;
+  border-bottom: 2px solid @sky;
+}
+
 #custom-vpn {
   color: @lavender;
   border-radius: 15px;

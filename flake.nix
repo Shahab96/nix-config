@@ -68,7 +68,6 @@
       "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          inputs.nvf.homeManagerModules.default
           ./home-manager/home.nix
         ];
       };
