@@ -68,6 +68,7 @@ in {
       "${config.xdg.configHome}/hypr".source = ./dotfiles/hypr;
       "${config.xdg.configHome}/waybar".source = ./dotfiles/waybar;
       "${config.xdg.configHome}/wofi".source = ./dotfiles/wofi;
+      "${config.xdg.configHome}/mako".source = ./dotfiles/mako;
     };
 
     packages = with pkgs; [
@@ -104,7 +105,7 @@ in {
       dolphin
       waybar
       font-awesome
-      swaynotificationcenter
+      mako
       hyprshot
       hyprlock
       hypridle

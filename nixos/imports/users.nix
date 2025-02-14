@@ -23,6 +23,10 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGD/V4jLpuk7uAovkbHFr6uulfBKZmsH+BqmXIR2aYD0"
         ];
       };
+
+      packages = with pkgs; [
+        libnotify
+      ];
     };
   };
 }
