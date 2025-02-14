@@ -69,6 +69,7 @@
         inherit pkgs;
         modules = [
           ./home-manager/home.nix
+          ./modules/home-manager/yubikey-touch-detector.nix
         ];
       };
     };
