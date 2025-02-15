@@ -9,7 +9,7 @@
   # Be sure to actually install the font first!
   font = "ComicCodeLigatures";
   username = "shahab";
-  email = "shahab@dogar.dev";
+  email = "${username}@dogar.dev";
   fullName = "Shahab Dogar";
 in {
   # You can import other home-manager modules here
@@ -123,6 +123,7 @@ in {
   # Enable home-manager
   programs.home-manager.enable = true;
 
+  # Add service to monitor yubikey requirement
   services.yubikey-touch-detector.enable = true;
 
   # Nicely reload system units when changing configs

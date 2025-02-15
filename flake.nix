@@ -43,7 +43,6 @@
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
     hostName = "rihla";
-    user = "shahab";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     nixosConfigurations = {
@@ -54,23 +53,21 @@
           inputs.disko.nixosModules.disko
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           inputs.sops-nix.nixosModules.sops
+          inputs.home-manager.nixosModules.home-manager
           ./nixos/configuration.nix
           ./nixos/disko-config.nix
           ./nixos/hardware-configuration.nix
+          {
+            home-manager = {
+              sharedModules = [
+                ./modules/home-manager/yubikey-touch-detector.nix
+              ];
+            };
+          }
         ];
         specialArgs = {
           inherit inputs hostName;
         };
-      };
-    };
-
-    homeConfigurations = {
-      "${user}" = inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home-manager/home.nix
-          ./modules/home-manager/yubikey-touch-detector.nix
-        ];
       };
     };
 

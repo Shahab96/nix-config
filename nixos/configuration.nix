@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{lib, ...}: {
+{lib, config, pkgs, ...}: {
   imports = [
     ./imports/environment.nix
     ./imports/hardware.nix
@@ -39,6 +39,8 @@
       allowUnfree = true;
     };
   };
+
+  home-manager.users.shahab = import ../home-manager/home.nix;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
