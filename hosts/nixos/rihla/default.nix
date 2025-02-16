@@ -30,7 +30,7 @@
       _module.args = {
         device = "/dev/nvme0n1";
         withSwap = true;
-        swapSize = 64;
+        swapSize = "64";
         label = "nixos";
       };
     }
