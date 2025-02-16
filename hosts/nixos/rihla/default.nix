@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   lib,
   ...
 }:
@@ -87,6 +88,10 @@
   };
 
   security.rtkit.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    pciutils
+  ];
 
   system.stateVersion = "25.05";
 }

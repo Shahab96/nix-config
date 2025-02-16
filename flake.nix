@@ -59,26 +59,6 @@
   in {
     nixosConfigurations = mkHostConfigs (readHosts "nixos");
 
-    # nixosConfigurations = {
-    #   rihla = nixpkgs.lib.nixosSystem {
-    #     system = "x86_64-linux";
-    #     modules = [
-    #       inputs.lanzaboote.nixosModules.lanzaboote
-    #       inputs.disko.nixosModules.disko
-    #       inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    #       inputs.sops-nix.nixosModules.sops
-    #       inputs.home-manager.nixosModules.home-manager
-    #       ./nixos/configuration.nix
-    #       ./nixos/disko-config.nix
-    #       ./nixos/hardware-configuration.nix
-    #     ];
-    #     specialArgs = {
-    #       inherit inputs;
-	  #       hostName = "rihla";
-    #     };
-    #   };
-    # };
-
     devShell.x86_64-linux = let 
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in pkgs.mkShell {

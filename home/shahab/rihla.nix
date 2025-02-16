@@ -13,15 +13,15 @@
     # ========== Host-specific Optional Configs ==========
     #
     (map (config: "${builtins.toString ./.}/common/optional/${config}.nix") [
-      "hyprland"
-      "starship"
-      "ssh"
-      "zsh"
       "btop"
       "firefox"
-      "nvim"
-      "tmux"
+      "hyprland"
       "misc-packages"
+      "nvim"
+      "ssh"
+      "starship"
+      "tmux"
+      "zsh"
     ])
   ];
 
