@@ -13,7 +13,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     # NixOS community managed hardware specific features/fixes
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     # Secure boot
     lanzaboote = {
@@ -41,37 +41,47 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
-    system = "x86_64-linux";
-    hostName = "rihla";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations = {
-      "${hostName}" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.disko.nixosModules.disko
-          inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-          inputs.sops-nix.nixosModules.sops
-          inputs.home-manager.nixosModules.home-manager
-          ./nixos/configuration.nix
-          ./nixos/disko-config.nix
-          ./nixos/hardware-configuration.nix
-          {
-            home-manager = {
-              sharedModules = [
-                ./modules/home-manager/yubikey-touch-detector.nix
-              ];
-            };
-          }
-        ];
+    inherit (nixpkgs) lib;
+    mkHost = host: {
+      ${host} = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs hostName;
+          inherit inputs;
+
+          # Extend lib with lib.custom
+          lib = nixpkgs.lib.extend (self: super: { custom = import ./lib { inherit (nixpkgs) lib; }; });
         };
+
+        modules = [ ./hosts/nixos/${host} ];
       };
     };
+    mkHostConfigs = hosts: lib.foldl (acc: set: acc // set) { } (lib.map (host: mkHost host) hosts);
+    readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
+  in {
+    nixosConfigurations = mkHostConfigs (readHosts "nixos");
 
-    devShell.x86_64-linux = pkgs.mkShell {
+    # nixosConfigurations = {
+    #   rihla = nixpkgs.lib.nixosSystem {
+    #     system = "x86_64-linux";
+    #     modules = [
+    #       inputs.lanzaboote.nixosModules.lanzaboote
+    #       inputs.disko.nixosModules.disko
+    #       inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    #       inputs.sops-nix.nixosModules.sops
+    #       inputs.home-manager.nixosModules.home-manager
+    #       ./nixos/configuration.nix
+    #       ./nixos/disko-config.nix
+    #       ./nixos/hardware-configuration.nix
+    #     ];
+    #     specialArgs = {
+    #       inherit inputs;
+	  #       hostName = "rihla";
+    #     };
+    #   };
+    # };
+
+    devShell.x86_64-linux = let 
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in pkgs.mkShell {
       buildInputs = with pkgs; [
         nil
         alejandra

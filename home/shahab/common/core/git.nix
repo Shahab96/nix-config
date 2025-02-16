@@ -1,15 +1,14 @@
 {
   lib,
   pkgs,
-  userName,
-  userEmail,
+  config,
   ...
 }: {
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;
-    userName = userName;
-    userEmail = userEmail;
+    userName = config.hostSpec.userFullName;
+    userEmail = config.hostSpec.email.user;
 
     extraConfig = {
       gpg = {
@@ -22,7 +21,7 @@
         gpgsign = true;
       };
       user = {
-        signingKey = "~/.ssh/id_ed25519.pub";
+        signingKey = "~/.ssh/id_rihla.pub";
       };
       pull = {
         rebase = true;

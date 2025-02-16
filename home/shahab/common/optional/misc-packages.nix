@@ -1,0 +1,43 @@
+{
+  pkgs,
+  ...
+}:
+
+{
+  home.packages = with pkgs; [
+    nh
+    bottom
+    discord
+    eza
+    ripgrep
+    rm-improved
+    dust
+    gh
+    zoxide
+    xcp
+    unzip
+    prismlauncher
+    lazygit
+    gcc
+    zig
+    protonmail-desktop
+    protonvpn-gui
+    cloudflare-warp
+    kubectl
+    gparted
+    k9s
+    gnupg
+    postgresql_17
+    dig
+    bash
+    kitty
+    dolphin
+    waybar
+    font-awesome
+    tree
+    wl-clipboard-rs
+    brightnessctl
+    age
+    obsidian
+  ];
+}

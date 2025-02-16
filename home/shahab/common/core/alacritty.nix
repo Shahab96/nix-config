@@ -1,4 +1,9 @@
-{font, ...}: {
+{
+  config,
+  ...
+}:
+
+{
   programs.alacritty = {
     enable = true;
 
@@ -24,9 +29,9 @@
 
       font = {
         size = 14;
-        normal.family = font;
-        bold.family = font;
-        italic.family = font;
+        normal.family = config.hostSpec.font;
+        bold.family = config.hostSpec.font;
+        italic.family = config.hostSpec.font;
       };
 
       cursor = {
