@@ -25,7 +25,12 @@
     # ========= Disk Layout =========
     #
     inputs.disko.nixosModules.disko
-    (lib.custom.relativeToRoot "hosts/common/disks/rihla.nix")
+    (lib.custom.relativeToRoot "hosts/common/disks/rihla.nix") {
+      device = "/dev/nvme0n1";
+      withSwap = true;
+      swapSize = 64;
+      label = "nixos";
+    }
 
     #
     # ========= Required Configs =========
@@ -67,6 +72,7 @@
   #
   hostSpec = {
     hostName = "rihla";
+    useYubikey = lib.mkForce true;
   };
 
   networking = {

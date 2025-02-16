@@ -1,9 +1,20 @@
 {
+  lib,
+  config,
+  device,
+  withSwap,
+  swapSize,
+  label,
+  ...
+}:
+
+{
   disko = {
     devices = {
       disk = {
         main = {
-          device = "/dev/nvme0n1";
+          inherit device;
+
           type = "disk";
           content = {
             type = "gpt";
@@ -50,8 +61,8 @@
         crypt_vg = {
           type = "lvm_vg";
           lvs = {
-            swap = {
-              size = "64G";
+            swap = lib.mkIf withSwap {
+              size = "${swapSize}G";
               content = {
                 type = "swap";
                 resumeDevice = true;
@@ -63,20 +74,22 @@
                 type = "btrfs";
                 extraArgs = [
                   "-L"
-                  "nixos"
+                  label
                   "-f"
                 ];
                 subvolumes = {
                   "@root" = {
                     mountpoint = "/";
                     mountOptions = [
+                      "subvol=root"
                       "compress=zstd"
+                      "noatime"
                     ];
                   };
-                  "@home" = {
-                    mountpoint = "/home";
+                  "@persist" = {
+                    mountpoint = config.hostSpec.persist;
                     mountOptions = [
-                      "subvol=home"
+                      "subvol=persist"
                       "compress=zstd"
                       "noatime"
                     ];

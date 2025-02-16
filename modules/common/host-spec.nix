@@ -40,6 +40,16 @@
       description = "The home directory of the user";
       default = "/home/${config.hostSpec.username}";
     };
+    impermenance = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether or not to enable impermenance";
+      default = false;
+    };
+    persist = lib.mkOption {
+      type = lib.types.str;
+      description = "The folder to persist data if impermenance is enabled";
+      default = "/persist";
+    };
     useYubikey = lib.mkOption {
       type = lib.types.bool;
       default = false;
