@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   lib,
+  config,
   ...
 }:
 
@@ -26,10 +27,12 @@
     #
     inputs.disko.nixosModules.disko
     (lib.custom.relativeToRoot "hosts/common/disks/rihla.nix") {
-      device = "/dev/nvme0n1";
-      withSwap = true;
-      swapSize = 64;
-      label = "nixos";
+      _module.args = {
+        device = "/dev/nvme0n1";
+        withSwap = true;
+        swapSize = 64;
+        label = "nixos";
+      };
     }
 
     #
@@ -42,7 +45,7 @@
     #
     # ========= Optional Configs =========
     #
-    (map (config: lib.custom.relativeToRoot "hosts/common/optional/${config}.nix") [
+    (map (c: lib.custom.relativeToRoot "hosts/common/optional/${c}.nix") [
       "1password"
       "dconf"
       "docker"
@@ -56,7 +59,7 @@
     #
     # ========= Optional Services =========
     #
-    (map (service: lib.custom.relativeToRoot "hosts/common/optional/services/${service}.nix") [
+    (map (s: lib.custom.relativeToRoot "hosts/common/optional/services/${s}.nix") [
       "audio"
       "bluetooth"
       "firmware"
@@ -73,6 +76,7 @@
   hostSpec = {
     hostName = "rihla";
     useYubikey = lib.mkForce true;
+    secureBoot = true;
   };
 
   networking = {
@@ -83,12 +87,37 @@
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = lib.mkForce false;
+      systemd-boot.enable = lib.mkForce (!config.hostSpec.secureBoot);
       efi.canTouchEfiVariables = true;
     };
 
+    initrd.postResumeCommands = lib.mkIf config.hostSpec.impermanance (lib.mkAfter ''
+      mkdir /btrfs_tmp
+      mount /dev/crypt_vg/root /btrfs_tmp
+      if [[ -e /btrfs_tmp/root ]]; then
+          mkdir -p /btrfs_tmp/old_roots
+          timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+          mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+      fi
+
+      delete_subvolume_recursively() {
+          IFS=$'\n'
+          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+              delete_subvolume_recursively "/btrfs_tmp/$i"
+          done
+          btrfs subvolume delete "$1"
+      }
+
+      for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+          delete_subvolume_recursively "$i"
+      done
+
+      btrfs subvolume create /btrfs_tmp/root
+      umount /btrfs_tmp
+    '');
+
     lanzaboote = {
-      enable = true;
+      enable = config.hostSpec.secureBoot;
       pkiBundle = "/var/lib/sbctl";
     };
   };

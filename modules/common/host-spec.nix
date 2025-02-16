@@ -40,7 +40,12 @@
       description = "The home directory of the user";
       default = "/home/${config.hostSpec.username}";
     };
-    impermenance = lib.mkOption {
+    secureBoot = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether or not secure boot has been enabled";
+      default = false;
+    };
+    impermanance = lib.mkOption {
       type = lib.types.bool;
       description = "Whether or not to enable impermenance";
       default = false;
