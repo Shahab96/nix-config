@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}:
+{ config, ... }:
 
 {
   programs.alacritty = {
@@ -21,9 +18,7 @@
         decorations_theme_variant = "None";
       };
 
-      env = {
-        TERM = "xterm-256color";
-      };
+      env = { TERM = "xterm-256color"; };
 
       terminal.shell.program = "zsh";
 
@@ -34,9 +29,7 @@
         italic.family = config.hostSpec.font;
       };
 
-      cursor = {
-        style = "Block";
-      };
+      cursor = { style = "Block"; };
 
       general.live_config_reload = true;
     };

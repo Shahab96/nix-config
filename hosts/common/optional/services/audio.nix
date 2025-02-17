@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   services = {
@@ -17,7 +14,6 @@
   };
   security.rtkit.enable = true;
 
-  environment.systemPackages = builtins.attrValues {
-    inherit (pkgs) pavucontrol;
-  };
+  environment.systemPackages =
+    builtins.attrValues { inherit (pkgs) pavucontrol; };
 }

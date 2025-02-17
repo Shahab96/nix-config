@@ -1,10 +1,5 @@
 # Specifications For Differentiating Hosts
-{
-  config,
-  lib,
-  ...
-}:
-{
+{ config, lib, ... }: {
   options.hostSpec = {
     username = lib.mkOption {
       type = lib.types.str;
@@ -68,7 +63,8 @@
     scaling = lib.mkOption {
       type = lib.types.str;
       default = "1";
-      description = "Used to indicate what scaling to use. Floating point number";
+      description =
+        "Used to indicate what scaling to use. Floating point number";
     };
     font = lib.mkOption {
       type = lib.types.str;

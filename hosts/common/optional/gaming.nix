@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   programs = {
@@ -15,8 +12,5 @@
     gamemode.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    mangohud
-    protonup-qt
-  ];
+  environment.systemPackages = with pkgs; [ mangohud protonup-qt ];
 }

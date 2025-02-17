@@ -1,10 +1,5 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    sbctl
-  ];
+  environment.systemPackages = with pkgs; [ sbctl ];
 }

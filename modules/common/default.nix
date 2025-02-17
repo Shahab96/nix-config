@@ -1,9 +1,5 @@
-{
-  ...
-}:
+{ ... }:
 
 {
-  imports = [
-    ./host-spec.nix
-  ];
+  imports = [ ./host-spec.nix ];
 }
