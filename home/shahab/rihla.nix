@@ -11,6 +11,7 @@
     (map (config: "${builtins.toString ./.}/common/optional/${config}.nix") [
       "btop"
       "firefox"
+      "ghostty"
       "hyprland"
       "misc-packages"
       "nvim"
