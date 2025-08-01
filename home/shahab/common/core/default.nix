@@ -2,7 +2,7 @@
   imports = lib.flatten [
     (map lib.custom.relativeToRoot [ "modules/common" "modules/home-manager" ])
 
-    ./alacritty.nix
+    ./ghostty.nix
     ./direnv.nix
     ./git.nix
     ./fonts.nix
@@ -18,8 +18,6 @@
     sessionVariables = {
       FLAKE = "$HOME/src/nix/nix-config";
       SHELL = "zsh";
-      TERM = "alacritty";
-      TERMINAL = "alacritty";
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
