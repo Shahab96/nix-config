@@ -25,7 +25,7 @@
       _module.args = {
         device = "/dev/nvme0n1";
         withSwap = true;
-        swapSize = "64";
+        swapSize = "4";
         label = "nixos";
       };
     }
@@ -69,8 +69,8 @@
   #
   hostSpec = {
     hostName = "rihla";
-    useYubikey = lib.mkForce true;
-    secureBoot = true;
+    useYubikey = lib.mkForce false;
+    secureBoot = false;
   };
 
   networking = {
