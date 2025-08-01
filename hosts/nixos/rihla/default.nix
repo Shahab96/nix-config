@@ -69,8 +69,10 @@
   #
   hostSpec = {
     hostName = "rihla";
-    useYubikey = lib.mkForce false;
+    useYubikey = lib.mkForce true;
     secureBoot = false;
+    persist = "/persist";
+    impermanance = false;
   };
 
   networking = {
