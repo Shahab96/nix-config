@@ -47,6 +47,7 @@
       "nix-ld"
       "secure-boot"
       "yubikey"
+      "claude-code"
     ])
 
     #
