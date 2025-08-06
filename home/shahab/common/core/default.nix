@@ -29,30 +29,20 @@
   };
 
   home.packages = with pkgs; [
-    bottom
-    lazygit
-    discord
+    nh
+    btop
     eza
     ripgrep
     rm-improved
     dust
-    gh
     zoxide
     xcp
     unzip
-    prismlauncher
     tmux
-    lazygit
     gcc
     zig
-    protonmail-desktop
-    protonvpn-gui
-    cloudflare-warp
-    kubectl
     gparted
-    k9s
     gnupg
-    postgresql_17
     dig
     bash
     dolphin
@@ -62,7 +52,6 @@
     brightnessctl
     age
     nerd-fonts.jetbrains-mono
-    obsidian
   ];
 
   nix = {
