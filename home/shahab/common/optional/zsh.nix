@@ -18,8 +18,8 @@
       du = "dust";
       rm = "rip";
       cp = "xcp";
-      uo = "nh os switch ~/nix-config";
-      uh = "nh home switch ~/nix-config";
+      uo = "nh os switch ~/git/nix-config";
+      uh = "nh home switch ~/git/nix-config";
       k = "kubectl";
     };
 
