@@ -5,7 +5,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtra = ''
+    initContent = ''
       source <(nh completions --shell zsh)
       eval "$(zoxide init zsh)"
     '';
@@ -19,7 +19,6 @@
       rm = "rip";
       cp = "xcp";
       uo = "nh os switch ~/git/nix-config";
-      uh = "nh home switch ~/git/nix-config";
       k = "kubectl";
     };
 

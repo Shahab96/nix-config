@@ -45,7 +45,7 @@
     gnupg
     dig
     bash
-    dolphin
+    kdePackages.dolphin
     font-awesome
     tree
     wl-clipboard-rs
