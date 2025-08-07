@@ -4,6 +4,7 @@
     enable = true;
     userName = config.hostSpec.userFullName;
     userEmail = config.hostSpec.email.user;
+    lfs.enable = true;
 
     extraConfig = {
       gpg = { format = "ssh"; };

@@ -6,7 +6,6 @@
     syntaxHighlighting.enable = true;
 
     initContent = ''
-      source <(nh completions --shell zsh)
       eval "$(zoxide init zsh)"
     '';
 
