@@ -21,11 +21,6 @@
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
-
-    file = {
-      "${config.xdg.configHome}/nvim".source =
-        lib.custom.relativeToRoot "dotfiles/nvim";
-    };
   };
 
   home.packages = with pkgs; [
