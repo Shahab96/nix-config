@@ -122,7 +122,7 @@
 
   security.rtkit.enable = true;
 
-  environment.systemPackages = with pkgs; [ pciutils ];
+  environment.systemPackages = with pkgs; [ pciutils bc ];
 
   system.stateVersion = "25.05";
 }
