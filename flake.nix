@@ -64,7 +64,8 @@
     in {
       nixosConfigurations = mkHostConfigs (readHosts "nixos");
 
-      devShell.x86_64-linux = let pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      devShell.x86_64-linux = let
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
       in pkgs.mkShell {
         buildInputs = with pkgs; [ nil lua-language-server ];
       };
