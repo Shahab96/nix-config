@@ -42,7 +42,6 @@
       "1password"
       "dconf"
       "docker"
-      "gaming"
       "hyprland"
       "nix-ld"
       "secure-boot"
@@ -62,6 +61,15 @@
         "openssh"
         "printing"
         "smart-card"
+      ])
+
+    #
+    # ========= Specialisations ========
+    #
+    (map
+      (s: lib.custom.relativeToRoot "hosts/common/specialisations/${s}.nix") [
+        "gaming"
+        "powersave"
       ])
   ];
 
