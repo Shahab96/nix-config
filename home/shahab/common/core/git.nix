@@ -15,6 +15,7 @@
       user = { signingKey = "~/.ssh/id_rihla.pub"; };
       pull = { rebase = true; };
       init = { defaultBranch = "main"; };
+      lfs = { locksverify = true; };
     };
   };
 }
