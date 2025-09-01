@@ -40,13 +40,14 @@
     #
     (map (c: lib.custom.relativeToRoot "hosts/common/optional/${c}.nix") [
       "1password"
+      "claude-code"
       "dconf"
       "docker"
+      "hoppscotch"
       "hyprland"
       "nix-ld"
       "secure-boot"
       "yubikey"
-      "claude-code"
     ])
 
     #
