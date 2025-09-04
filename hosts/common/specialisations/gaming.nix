@@ -1,6 +1,7 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, config, lib, ... }:
+let
+  hostSpec = config.hostSpec;
+in {
   specialisation.gaming.configuration = {
     programs = {
       steam = {
@@ -13,8 +14,16 @@
       gamemode.enable = true;
     };
 
+    home-manager.users."${hostSpec.username}".imports = lib.flatten [
+      ({ config, ... }:
+        import (lib.custom.relativeToRoot
+          "home/${hostSpec.username}/specialisations/gaming.nix") {
+            inherit pkgs;
+          })
+    ];
+
     powerManagement.cpuFreqGovernor = "performance";
 
-    environment.systemPackages = with pkgs; [ mangohud protonup-qt prismlauncher ];
+    environment.systemPackages = with pkgs; [ mangohud protonup-qt ];
   };
 }

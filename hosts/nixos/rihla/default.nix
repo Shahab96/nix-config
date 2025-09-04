@@ -70,7 +70,6 @@
     (map
       (s: lib.custom.relativeToRoot "hosts/common/specialisations/${s}.nix") [
         "gaming"
-        "powersave"
       ])
   ];
 
