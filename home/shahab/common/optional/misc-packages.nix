@@ -5,7 +5,7 @@
     discord
     lazygit
     gh
-    prismlauncher
+    dbeaver-bin
     cloudflare-warp
     protonmail-desktop
     protonvpn-gui

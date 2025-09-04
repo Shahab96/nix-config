@@ -15,6 +15,6 @@
 
     powerManagement.cpuFreqGovernor = "performance";
 
-    environment.systemPackages = with pkgs; [ mangohud protonup-qt ];
+    environment.systemPackages = with pkgs; [ mangohud protonup-qt prismlauncher ];
   };
 }
