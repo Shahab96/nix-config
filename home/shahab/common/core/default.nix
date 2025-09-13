@@ -2,7 +2,7 @@
   imports = lib.flatten [
     (map lib.custom.relativeToRoot [ "modules/common" "modules/home-manager" ])
 
-    ./ghostty.nix
+    ./kitty.nix
     ./direnv.nix
     ./git.nix
     ./fonts.nix
@@ -21,33 +21,33 @@
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
-  };
 
-  home.packages = with pkgs; [
-    nh
-    btop
-    eza
-    ripgrep
-    rm-improved
-    dust
-    zoxide
-    xcp
-    unzip
-    tmux
-    gcc
-    zig
-    gparted
-    gnupg
-    dig
-    bash
-    kdePackages.dolphin
-    font-awesome
-    tree
-    wl-clipboard-rs
-    brightnessctl
-    age
-    nerd-fonts.jetbrains-mono
-  ];
+    packages = with pkgs; [
+      nh
+      btop
+      eza
+      ripgrep
+      rm-improved
+      dust
+      zoxide
+      xcp
+      unzip
+      tmux
+      gcc
+      zig
+      gparted
+      gnupg
+      dig
+      bash
+      kdePackages.dolphin
+      font-awesome
+      tree
+      wl-clipboard-rs
+      brightnessctl
+      age
+      nerd-fonts.jetbrains-mono
+    ];
+  };
 
   nix = {
     package = lib.mkDefault pkgs.nix;
