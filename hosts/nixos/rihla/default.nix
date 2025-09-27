@@ -92,7 +92,10 @@
   boot = {
     loader = {
       # Set this to true on first install. This must be false for secure boot.
-      systemd-boot.enable = lib.mkForce (!config.hostSpec.secureBoot);
+      systemd-boot = {
+        enable = lib.mkForce (!config.hostSpec.secureBoot);
+        configurationLimit = config.hostSpec.bootHistoryLimit;
+      };
       efi.canTouchEfiVariables = true;
     };
 

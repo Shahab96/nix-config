@@ -40,6 +40,11 @@
       description = "Whether or not secure boot has been enabled";
       default = false;
     };
+    bootHistoryLimit = lib.mkOption {
+      type = lib.types.int;
+      description = "How many generations to keep bootable in history";
+      default = 3;
+    };
     impermanance = lib.mkOption {
       type = lib.types.bool;
       description = "Whether or not to enable impermenance";
