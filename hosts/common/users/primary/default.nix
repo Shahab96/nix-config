@@ -1,5 +1,10 @@
-{ pkgs, config, lib, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
   hostSpec = config.hostSpec;
   pubKeys = lib.filesystem.listFilesRecursive ./keys;
 in {
@@ -13,15 +18,14 @@ in {
       shell = pkgs.zsh;
       home = hostSpec.home;
       isNormalUser = true;
-      hashedPassword =
-        "$y$j9T$pvjyL7hL5x2VBarGNTnMl1$mLA2UsWTbfp8Hgp/ug5l8224thi..Mo8.p7ME.tDZ.4";
-      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+      hashedPassword = "$y$j9T$pvjyL7hL5x2VBarGNTnMl1$mLA2UsWTbfp8Hgp/ug5l8224thi..Mo8.p7ME.tDZ.4";
+      extraGroups = ["networkmanager" "wheel" "input" "libvirtd"];
 
       # Read all keys in ./keys and add them to authorizedKeys.
       openssh.authorizedKeys.keys =
         lib.lists.forEach pubKeys (key: builtins.readFile key);
 
-      packages = with pkgs; [ libnotify ];
+      packages = with pkgs; [libnotify];
     };
   };
 
@@ -31,11 +35,11 @@ in {
       hostSpec = config.hostSpec;
     };
     users.${hostSpec.username}.imports = lib.flatten [
-      ({ config, ... }:
+      ({config, ...}:
         import (lib.custom.relativeToRoot
           "home/${hostSpec.username}/${hostSpec.hostName}.nix") {
-            inherit pkgs inputs config lib hostSpec;
-          })
+          inherit pkgs inputs config lib hostSpec;
+        })
     ];
   };
 }

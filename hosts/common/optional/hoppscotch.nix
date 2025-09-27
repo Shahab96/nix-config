@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
-{
-  environment.systemPackages = with pkgs; [ hoppscotch ];
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [hoppscotch];
 }

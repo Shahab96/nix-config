@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{lib, ...}: {
   imports = lib.flatten [
     #
     # ========== Required Configs ==========

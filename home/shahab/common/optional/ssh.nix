@@ -1,5 +1,5 @@
-{ ... }:
-let onePassPath = "~/.1password/agent.sock";
+{...}: let
+  onePassPath = "~/.1password/agent.sock";
 in {
   programs.ssh = {
     enable = true;

@@ -1,6 +1,10 @@
-{ pkgs, inputs, config, lib, ... }:
-
 {
+  pkgs,
+  inputs,
+  config,
+  lib,
+  ...
+}: {
   imports = lib.flatten [
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
@@ -14,7 +18,7 @@
   hostSpec = {
     username = "shahab";
     handle = "shahab96";
-    email = { user = "shahab@dogar.dev"; };
+    email = {user = "shahab@dogar.dev";};
     userFullName = "Shahab Dogar";
     domain = "rihla";
     networking.ports.tcp.ssh = 22;
@@ -50,13 +54,13 @@
 
       auto-optimise-store = true;
       warn-dirty = false;
-      trusted-users = [ "@wheel" ];
+      trusted-users = ["@wheel"];
 
-      substituters = [ "https://hyprland.cachix.org" ];
+      substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
   };
 
@@ -70,7 +74,7 @@
   };
 
   # ========= Sops =========
-  environment.systemPackages = with pkgs; [ sops ];
+  environment.systemPackages = with pkgs; [sops];
 
   #
   # ========== Localization ==========

@@ -40,34 +40,34 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs:
-    let
-      inherit (nixpkgs) lib;
-      mkHost = host: {
-        ${host} = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+  outputs = {nixpkgs, ...} @ inputs: let
+    inherit (nixpkgs) lib;
+    mkHost = host: {
+      ${host} = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
 
-            # Extend lib with lib.custom
-            lib = nixpkgs.lib.extend (self: super: {
-              custom = import ./lib { inherit (nixpkgs) lib; };
-            });
-          };
-
-          modules = [ ./hosts/nixos/${host} ];
+          # Extend lib with lib.custom
+          lib = nixpkgs.lib.extend (self: super: {
+            custom = import ./lib {inherit (nixpkgs) lib;};
+          });
         };
-      };
-      mkHostConfigs = hosts:
-        lib.foldl (acc: set: acc // set) { }
-        (lib.map (host: mkHost host) hosts);
-      readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
-    in {
-      nixosConfigurations = mkHostConfigs (readHosts "nixos");
 
-      devShell.x86_64-linux = let
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      in pkgs.mkShell {
-        buildInputs = with pkgs; [ nil lua-language-server ];
+        modules = [./hosts/nixos/${host}];
       };
     };
+    mkHostConfigs = hosts:
+      lib.foldl (acc: set: acc // set) {}
+      (lib.map (host: mkHost host) hosts);
+    readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
+  in {
+    nixosConfigurations = mkHostConfigs (readHosts "nixos");
+
+    devShell.x86_64-linux = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in
+      pkgs.mkShell {
+        buildInputs = with pkgs; [nil lua-language-server];
+      };
+  };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   virtualisation = {
     podman = {
       enable = true;
@@ -11,7 +11,7 @@
       };
     };
 
-    containers = { registries = { search = [ "docker.io" ]; }; };
+    containers = {registries = {search = ["docker.io"];};};
 
     libvirtd = {
       enable = true;
@@ -20,7 +20,7 @@
 
         ovmf = {
           enable = true;
-          packages = with pkgs; [ OVMFFull.fd ];
+          packages = with pkgs; [OVMFFull.fd];
         };
       };
     };

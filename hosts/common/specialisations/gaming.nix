@@ -1,5 +1,9 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   hostSpec = config.hostSpec;
 in {
   specialisation.gaming.configuration = {
@@ -15,15 +19,15 @@ in {
     };
 
     home-manager.users."${hostSpec.username}".imports = lib.flatten [
-      ({ config, ... }:
+      ({config, ...}:
         import (lib.custom.relativeToRoot
           "home/${hostSpec.username}/specialisations/gaming.nix") {
-            inherit pkgs;
-          })
+          inherit pkgs;
+        })
     ];
 
     powerManagement.cpuFreqGovernor = "performance";
 
-    environment.systemPackages = with pkgs; [ mangohud protonup-qt ];
+    environment.systemPackages = with pkgs; [mangohud protonup-qt];
   };
 }

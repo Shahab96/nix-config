@@ -1,6 +1,10 @@
-{ inputs, pkgs, lib, config, ... }:
-
 {
+  inputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = lib.flatten [
     #
     # ========= Hardware =========
@@ -33,7 +37,7 @@
     #
     # ========= Required Configs =========
     #
-    (map lib.custom.relativeToRoot [ "hosts/common/core" ])
+    (map lib.custom.relativeToRoot ["hosts/common/core"])
 
     #
     # ========= Optional Configs =========
@@ -99,7 +103,8 @@
       efi.canTouchEfiVariables = true;
     };
 
-    initrd.postResumeCommands = lib.mkIf config.hostSpec.impermanance
+    initrd.postResumeCommands =
+      lib.mkIf config.hostSpec.impermanance
       (lib.mkAfter ''
         mkdir /btrfs_tmp
         mount /dev/crypt_vg/root /btrfs_tmp
@@ -133,7 +138,7 @@
 
   security.rtkit.enable = true;
 
-  environment.systemPackages = with pkgs; [ pciutils bc ];
+  environment.systemPackages = with pkgs; [pciutils bc];
 
   system.stateVersion = "25.05";
 }
