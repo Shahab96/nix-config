@@ -42,7 +42,6 @@
       lib.mkDefault config.hardware.enableRedistributableFirmware;
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [amdvlk];
     };
   };
 }
